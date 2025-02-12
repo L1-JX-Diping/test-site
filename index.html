@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>文字列処理フォーム</title>
+    <title>歌詞のランダムパート分け</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
         textarea { width: 100%; height: 100px; }
@@ -23,23 +23,27 @@
         <button type="button" onclick="ShowDivision()">パート分け</button>
     </form>
     
-    <div class="output" id="outputField"></div>
+    <div class="confirm" id="confirmField"></div>
+    <div class="output" id="lyricsField"></div>
     
     <script>
         const playerCount = document.getElementById("playerCount").value;
         const maxRepeatCnt = document.getElementById("maxRepeat").value;
         const songTitle = document.getElementById("songTitle").value;
-        const text = document.getElementById("textInput").value;
+        const inputText = document.getElementById("textInput").value;
         const today = new Date().toLocaleDateString();
+        const inputInfo = "【処理結果】\n日付: ${today}\nPlayer人数: ${playerCount}\nパート連続可能回数: ${maxRepeatCnt}\n歌名: ${songTitle}";
 
-        function ProcessInput() {            
-            const output = `【処理結果】\n日付: ${today}\nPlayer人数: ${playerCount}\nパート連続可能回数: ${maxRepeatCnt}\n歌名: ${songTitle}\n入力文章: ${text}`;            
-            document.getElementById("outputField").innerText = output;
+        function ProcessInput() {
+            const text = "\n入力文章:\n${inputText}";
+            const output = inputInfo + text;
+            document.getElementById("confirmField").innerText = output;
         }
         
         function ShowDivision() {
-            const output = `【処理結果】\n日付: ${today}\nPlayer人数: ${playerCount}\nパート連続可能回数: ${maxRepeatCnt}\n歌名: ${songTitle}\n入力文章: ${text}`;            
-            document.getElementById("outputField").innerText = output;
+            const resultLyrics = '\nパート分け後の歌詞:\n ${inputText}';
+            const output = inputInfo + resultLyrics;
+            document.getElementById("lyricsField").innerText = output;
         }
     </script>
 </body>
