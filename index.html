@@ -19,21 +19,26 @@
         <textarea id="songTitle" maxlength="100"></textarea><br>
         <label>文章（1000文字以内）:</label><br>
         <textarea id="textInput" maxlength="1000"></textarea><br>
-        <button type="button" onclick="processInput()">処理する</button>
+        <button type="button" onclick="ProcessInput()">入力情報再表示</button>
+        <button type="button" onclick="ShowDivision()">パート分け</button>
     </form>
     
     <div class="output" id="outputField"></div>
     
     <script>
-        function processInput() {
-            const playerCount = document.getElementById("playerCount").value;
-            const maxRepeatCnt = document.getElementById("maxRepeat").value;
-            const songTitle = document.getElementById("songTitle").value;
-            const text = document.getElementById("textInput").value;
-            
-            const today = new Date().toLocaleDateString();
-            const output = `【処理結果】\n日付: ${today}\nPlayer人数: ${playerCount}\nパート連続可能回数: ${maxRepeatCnt}\n歌名: ${songTitle}\n入力文章: ${text}`;
-            
+        const playerCount = document.getElementById("playerCount").value;
+        const maxRepeatCnt = document.getElementById("maxRepeat").value;
+        const songTitle = document.getElementById("songTitle").value;
+        const text = document.getElementById("textInput").value;
+        const today = new Date().toLocaleDateString();
+
+        function ProcessInput() {            
+            const output = `【処理結果】\n日付: ${today}\nPlayer人数: ${playerCount}\nパート連続可能回数: ${maxRepeatCnt}\n歌名: ${songTitle}\n入力文章: ${text}`;            
+            document.getElementById("outputField").innerText = output;
+        }
+        
+        function ShowDivision() {
+            const output = `【処理結果】\n日付: ${today}\nPlayer人数: ${playerCount}\nパート連続可能回数: ${maxRepeatCnt}\n歌名: ${songTitle}\n入力文章: ${text}`;            
             document.getElementById("outputField").innerText = output;
         }
     </script>
