@@ -7,14 +7,14 @@
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
         textarea { width: 100%; height: 100px; }
-        .output { margin-top: 20px; padding: 10px; border: 1px solid #000; }
+        .output { margin-top: 20px; padding: 10px; border: 1px solid #000; white-space: pre-line; }
     </style>
 </head>
 <body>
-    <h2>文字列処理フォーム</h2>
+    <h2>歌詞のランダムパート分け</h2>
     <form id="inputForm">
-        <label>Playする人数: <input type="number" id="playerCount">人</label><br>
-        <label>パート連続可能回数: <input type="number" id="maxRepeat">回まで許容</label><br>
+        <label>Playする人数: <input type="number" id="playerCount"> 人</label><br>
+        <label>パート連続可能回数: <input type="number" id="maxRepeat"> 回まで許容</label><br>
         <label>歌名:</label><br>
         <textarea id="songTitle" maxlength="100"></textarea><br>
         <button type="button" onclick="ShowDivision()">パート分け</button><br>
@@ -27,23 +27,28 @@
     <div class="output" id="lyricsField"></div>
     
     <script>
-        const playerCount = document.getElementById("playerCount").value;
-        const maxRepeatCnt = document.getElementById("maxRepeat").value;
-        const songTitle = document.getElementById("songTitle").value;
-        const inputText = document.getElementById("textInput").value;
-        const today = new Date().toLocaleDateString();
-        const inputInfo = '【処理結果】\n日付: ${today}\nPlayer人数: ${playerCount}\nパート連続可能回数: ${maxRepeatCnt}\n歌名: ${songTitle}';
-
         function ProcessInput() {
-            const text = '\n入力文章:\n${inputText}';
-            const output = inputInfo + text;
-            document.getElementById("confirmField").innerText = output;
+            const playerCount = document.getElementById("playerCount").value;
+            const maxRepeatCnt = document.getElementById("maxRepeat").value;
+            const songTitle = document.getElementById("songTitle").value;
+            const inputText = document.getElementById("textInput").value;
+            const today = new Date().toLocaleDateString();
+            
+            const inputInfo = `【処理結果】\n日付: ${today}\nPlayer人数: ${playerCount}\nパート連続可能回数: ${maxRepeatCnt}\n歌名: ${songTitle}`;
+            const text = `\n入力文章:\n${inputText}`;
+            document.getElementById("confirmField").innerText = inputInfo + text;
         }
         
         function ShowDivision() {
-            const resultLyrics = '\nパート分け後の歌詞:\n ${inputText}';
-            const output = inputInfo + resultLyrics;
-            document.getElementById("lyricsField").innerText = output;
+            const playerCount = document.getElementById("playerCount").value;
+            const maxRepeatCnt = document.getElementById("maxRepeat").value;
+            const songTitle = document.getElementById("songTitle").value;
+            const inputText = document.getElementById("textInput").value;
+            const today = new Date().toLocaleDateString();
+            
+            const inputInfo = `【処理結果】\n日付: ${today}\nPlayer人数: ${playerCount}\nパート連続可能回数: ${maxRepeatCnt}\n歌名: ${songTitle}`;
+            const resultLyrics = `\nパート分け後の歌詞:\n${inputText}`;
+            document.getElementById("lyricsField").innerText = inputInfo + resultLyrics;
         }
     </script>
 </body>
