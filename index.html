@@ -13,9 +13,10 @@
 <body>
     <h2>文字列処理フォーム</h2>
     <form id="inputForm">
-        <label>Playする人数: <input type="number" id="num1">人</label><br>
-        <label>パートの連続はmax: <input type="number" id="num2">まで許容</label><br>
-        <label>パート連続許容max回数: <input type="number" id="num3"></label><br>
+        <label>Playする人数: <input type="number" id="playerCount">人</label><br>
+        <label>パート連続可能回数: <input type="number" id="maxRepeat">回まで許容</label><br>
+        <label>文章（1000文字以内）:</label><br>
+        <textarea id="songTitle" maxlength="100"></textarea><br>
         <label>文章（1000文字以内）:</label><br>
         <textarea id="textInput" maxlength="1000"></textarea><br>
         <button type="button" onclick="processInput()">処理する</button>
@@ -25,13 +26,13 @@
     
     <script>
         function processInput() {
-            const num1 = document.getElementById("num1").value;
-            const num2 = document.getElementById("num2").value;
-            const num3 = document.getElementById("num3").value;
+            const playerCount = document.getElementById("playerCount").value;
+            const maxRepeatCnt = document.getElementById("maxRepeat").value;
+            const songTitle = document.getElementById("songTitle").value;
             const text = document.getElementById("textInput").value;
             
             const today = new Date().toLocaleDateString();
-            const output = `【処理結果】\n日付: ${today}\n数値1: ${num1}\n数値2: ${num2}\n数値3: ${num3}\n文章: ${text}`;
+            const output = `【処理結果】\n日付: ${today}\nPlayer人数: ${playerCount}\nパート連続可能回数: ${maxRepeatCnt}\n歌名: ${songTitle}\n入力文章: ${text}`;
             
             document.getElementById("outputField").innerText = output;
         }
