@@ -18,8 +18,8 @@
         <label>歌名: <input type="text" id="songTitle"></label>
         <button type="button" onclick="LoadLyrics()">確定</button><br>
         <button type="button" onclick="ShowDivision()">パート分け</button><br>
-        <label>文章（1000文字以内）:</label><br>
-        <textarea id="textInput" maxlength="1000"></textarea><br>
+<!--         <label>文章（1000文字以内）:</label><br> -->
+<!--         <textarea id="textInput" maxlength="1000"></textarea><br> -->
         <button type="button" onclick="ProcessInput()">入力情報再表示</button><br>
     </form>
     
@@ -35,7 +35,7 @@
             const today = new Date().toLocaleDateString();
             
             const inputInfo = `【処理結果】\n日付: ${today}\nPlayer人数: ${playerCount}\nパート連続可能回数: ${maxRepeatCnt}\n歌名: ${songTitle}`;
-            const text = `\n入力文章:\n${inputText}`;
+            // const text = `\n入力文章:\n${inputText}`;
             document.getElementById("confirmField").innerText = inputInfo + text;
         }
 
