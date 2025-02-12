@@ -38,6 +38,17 @@
             const text = `\n入力文章:\n${inputText}`;
             document.getElementById("confirmField").innerText = inputInfo + text;
         }
+
+        function LoadLyrics() {
+            fetch("冬のはなし.txt")
+                .then(response => response.text())  // テキストとして取得
+                .then(data => {
+                    document.getElementById("lyricsField").innerText = data;  // 画面に表示
+                })
+                .catch(error => {
+                    console.error("エラー:", error);
+                });
+        }
         
         function ShowDivision() {
             const playerCount = document.getElementById("playerCount").value;
