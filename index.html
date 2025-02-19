@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>歌詞のランダムパート分け</title>
+    <title>タブ：歌詞のランダムパート分け</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
         textarea { width: 100%; height: 100px; }
@@ -40,14 +40,25 @@
         }
 
         function LoadLyrics() {
+            const songTitle = document.getElementById("songTitle").value;
+            // /* If no file titled $"{songTitle without spaces}.txt" like "OneCallAway.txt" is found */
+            // 1. An input field will appear, and user will be required to input whole lyrics of the song 
+            // 2. Get the lyrics and make a file titled $"{songTitle without spaces}.txt" like "OneCallAway.txt" 
+
+            // /* If a file titled $"{songTitle without spaces}.txt" found */
             fetch("冬のはなし.txt")
-                .then(response => response.text())  // テキストとして取得
+                .then(lyrics => response.text())  // テキストとして取得
                 .then(data => {
                     document.getElementById("lyricsField").innerText = data;  // 画面に表示
                 })
                 .catch(error => {
                     console.error("エラー:", error);
                 });
+
+            // /* To divide lyrics randomly and display these in each color */
+            // Get parameters
+            const colorCnt = document.getElementById("playerCount").value;
+            const maxRepeatCnt = document.getElementById("maxRepeat").value;
         }
         
         function ShowDivision() {
