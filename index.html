@@ -15,7 +15,7 @@
     <h2>歌詞のランダムパート分け</h2>
     <form id="inputForm">
         <label>Playする人数: <input type="number" id="playerCount" min="1" value="2"> 人</label><br>
-        <label>パート連続可能回数: <input type="number" id="maxRepeat" min="1" value="2"> 回まで許容</label><br>
+        <label>パート連続可能回数: <input type="number" id="consecutiveLimit" min="1" value="2"> 回まで許容</label><br>
         <label>歌名: <input type="text" id="songTitle"></label>
         <button type="button" onclick="loadLyrics()">確定</button><br>
         <button type="button" onclick="showDivision()">パート分け</button><br>
@@ -45,7 +45,7 @@
             return parts;
         }
 
-        function roleAssignment(parts, playerCount, maxRepeat) {
+        function roleAssignment(parts, playerCount, consecutiveLimit) {
             let assignedParts = [];
             let colors = getRandomColors(playerCount);
             let currentColor = null;
@@ -54,7 +54,7 @@
             for (let part of parts) {
                 let color = colors[Math.floor(Math.random() * colors.length)];
 
-                if (repeatCount >= maxRepeat || currentColor === null) {
+                if (repeatCount >= consecutiveLimit || currentColor === null) {
                     while (color === currentColor) {
                         color = colors[Math.floor(Math.random() * colors.length)];
                     }
@@ -83,10 +83,10 @@
 
             const lyrics = lyricsInput.value.trim();
             const playerCount = parseInt(document.getElementById("playerCount").value, 10);
-            const maxRepeat = parseInt(document.getElementById("maxRepeat").value, 10);
+            const consecutiveLimit = parseInt(document.getElementById("consecutiveLimit").value, 10);
             
             let dividedLyrics = getDividedLyrics(lyrics);
-            let coloredParts = roleAssignment(dividedLyrics, playerCount, maxRepeat);
+            let coloredParts = roleAssignment(dividedLyrics, playerCount, consecutiveLimit);
 
             const lyricsField = document.getElementById("lyricsField");
             lyricsField.innerHTML = "";
