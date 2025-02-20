@@ -69,12 +69,9 @@
         }
 
         function showDivision() {
-            if (!window.lyricsText || window.lyricsText.trim() === "") {
-                alert("歌詞を入力してください！");
-                return;
-            }
+            const songTitle = document.getElementById("songTitle").value;
+            let lyrics = getLyrics(songTitle)
 
-            const lyrics = window.lyricsText.trim();
             const playerCount = parseInt(document.getElementById("playerCount").value, 10);
             const consecutiveLimit = parseInt(document.getElementById("consecutiveLimit").value, 10);
             
@@ -92,21 +89,33 @@
             });
         }
 
-        // 歌詞ファイルの取得
-        fetch("冬のはなし.txt")
-            .then(response => response.text())
-            .then(data => {
-                window.lyricsText = data;
-                document.getElementById("lyricsField").innerText = data;
-            })
-            .catch(error => {
-                console.error("エラー:", error);
-                document.getElementById("lyricsField").innerHTML = "歌詞を入力してください：<br><textarea id='lyricsInput'></textarea><br><button onclick='setLyrics()'>確定</button>";
-            });
+        function getLyrics(songTitle) {
+            let filePath = "Lyrics/" + songTitle + ".txt"
+            // 歌詞ファイルの取得
+            fetch(filePath)
+                .then(lyrics => response.text())
+                .then(data => {
+                    window.lyricsText = data;
+                    document.getElementById("lyricsField").innerText = data;
+                })
+                .catch(error => {
+                    console.error("エラー:", error);
+                    document.getElementById("lyricsField").innerHTML = "歌詞を入力してください：<br><textarea id='lyricsInput'></textarea><br><button onclick='setLyrics()'>確定</button>";
+                });
+            
+            // if file not found, get user input and make file
+            if (!window.lyricsText || window.lyricsText.trim() === "") {
+                alert("歌詞を入力してください！");
+                return;
+            }
+            const lyrics = window.lyricsText.trim();
+
+            return lyrics;
+        }
         
         function setLyrics() {
             const lyricsInput = document.getElementById("lyricsInput");
-            if (lyricsInput && lyricsInput.value.trim() !== "") {
+            if (lyricsInput && lyricsInput.value !== "") {
                 window.lyricsText = lyricsInput.value.trim();
                 document.getElementById("lyricsField").innerText = window.lyricsText;
             }
